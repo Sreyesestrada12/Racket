@@ -39,11 +39,22 @@
 (define (Main)
 	(define name 0)
 	(define domain "@utp.edu.co")
+	
 	(printf "Please enter your name: ")
 	(set! name (read-line))
+	
 	(define new_mail (make-string (+ (WordsCounter 0 name 0) (string-length domain))))
 	(string-set! new_mail 0 (char-downcase (string-ref name 0)))
-	(CreatMail 1 1 name domain new_mail)
+	
+	(if (> (string-length name) 200)
+		(begin
+			(printf "Max 200 Characters.\n")
+			(newline)
+			(Main)
+		)
+		(CreatMail 1 1 name domain new_mail)
+	)
+
 	(printf "This is your new email: ~a\n" new_mail)
 )
 
